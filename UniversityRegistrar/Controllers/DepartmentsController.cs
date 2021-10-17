@@ -53,14 +53,19 @@ namespace UniversityRegistrar.Controllers
     }
 
     public ActionResult Edit(int id)
-    {
+    { 
       var thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
+      ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
       return View(thisDepartment);
     }
 
     [HttpPost]
-    public ActionResult Edit(Department department)
+    public ActionResult Edit(Department department, int CourseId)
     {
+       if (CourseId != 0)
+      {
+        _db.CourseDepartment.Add(new CourseDepartment() { CourseId = CourseId, DepartmentId = department.DepartmentId });
+      }
       _db.Entry(department).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
