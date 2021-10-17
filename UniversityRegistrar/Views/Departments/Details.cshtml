@@ -1,0 +1,55 @@
+@{
+  Layout = "_Layout";
+}
+
+@model UniversityRegistrar.Models.Department
+
+<h2>Department Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.DepartmentName): @Html.DisplayFor(model => model.DepartmentName)</h3>
+
+@if(@Model.JoinEntities3.Count == 0)
+{
+  <p>There are no courses in this department</p>
+}
+else
+{
+  <h4>Courses in this department are:</h4>
+  <ul>
+  @foreach(var join in Model.JoinEntities3)
+  {
+    <li>@join.Course.CourseName</li>
+    @using (Html.BeginForm("DeleteCourse", "Departments"))
+    {
+      @Html.Hidden("joinId", @join.CourseDepartmentId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+}
+
+@* @if(@Model.JoinEntities3.Count == 0)
+{
+  <p>There are no courses in this department</p>
+}
+else
+{
+  <h4>Courses in this department are:</h4>
+  <ul>
+  @foreach(var join in Model.JoinEntities3)
+  {
+    <li>@join.Course.CourseName</li>
+    @using (Html.BeginForm("DeleteCourse", "Departments"))
+    {
+      @Html.Hidden("joinId", @join.CourseDepartmentId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+} *@
+
+<p>@Html.ActionLink("Add a Course", "AddCourse", new { id = Model.DepartmentId })</p> 
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Edit Department", "Edit", new { id = Model.DepartmentId })</p>
+<p>@Html.ActionLink("Terminate Department", "Delete", new { id = Model.DepartmentId })</p>

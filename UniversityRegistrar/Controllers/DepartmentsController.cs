@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using UniversityRegistrar.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +24,19 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Department department)
+    public ActionResult Create(Department department, int CourseId)
     {
       _db.Departments.Add(department);
+      _db.SaveChanges();
+      if (CourseId != 0)
+      {
+        _db.CourseDepartment.Add(new CourseDepartment() { CourseId = CourseId, DepartmentId = department.DepartmentId });
+      }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
@@ -38,8 +45,9 @@ namespace UniversityRegistrar.Controllers
     {
       var thisDepartment = _db.Departments
           .Include(department => department.JoinEntities2)
+          .ThenInclude(join => join.Student)
           .Include(department => department.JoinEntities3)
-          .ThenInclude(join => join.Department)
+          .ThenInclude(join => join.Course)
           .FirstOrDefault(department => department.DepartmentId == id);
       return View(thisDepartment);
     }
