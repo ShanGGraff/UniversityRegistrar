@@ -2,13 +2,13 @@
   Layout = "_Layout";
 }
 
-@model UniversityRegistrar.Models.Student
+@model UniversityRegistrar.Models.Department
 
-<h2>Are you sure you want to terminate this student? Give it a second chance?</h2>
+<h2>Are you sure you want to terminate this Department? Give it a second chance?</h2>
 
-@Html.DisplayNameFor(model => model.StudentName): @Html.DisplayFor(model => model.StudentName)
+@Html.DisplayNameFor(model => model.DepartmentName): @Html.DisplayFor(model => model.DepartmentName)
 @using (Html.BeginForm())
 {
-  <input type="submit" value="Terminate Student" class = "btn-btn-danger"/>
+  <button class = "btn-btn-danger" type="submit">Terminate Department</button>
 }
 @Html.ActionLink("Back to List", "Index")
