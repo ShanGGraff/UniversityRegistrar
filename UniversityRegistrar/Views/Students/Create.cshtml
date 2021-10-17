@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model UniversityRegistrar.Models.Student
+
+<h4>Add a new student... to delete</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.StudentName)
+  @Html.TextBoxFor(model => model.StudentName)
+
+  @Html.LabelFor(model => model.EnrollmentDate)
+  @Html.EditorFor(model => model.EnrollmentDate)
+
+  @Html.Label("Select course")
+  @Html.DropDownList("CourseId")
+
+  <input type="submit" value="Add new student" class="btn btn-secondary" />
+}
+<p>@Html.ActionLink("Back to students page", "Index")</p>
