@@ -44,9 +44,9 @@ namespace UniversityRegistrar.Controllers
     public ActionResult Details(int id)
     {
       var thisDepartment = _db.Departments
-          .Include(department => department.JoinEntities2)
+          .Include(department => department.DepartmentStudentJE)
           .ThenInclude(join => join.Student)
-          .Include(department => department.JoinEntities3)
+          .Include(department => department.CourseDepartmentJE)
           .ThenInclude(join => join.Course)
           .FirstOrDefault(department => department.DepartmentId == id);
       return View(thisDepartment);
@@ -100,6 +100,15 @@ namespace UniversityRegistrar.Controllers
     {
       var thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
       _db.Departments.Remove(thisDepartment);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult DeleteCourse(int joinId)
+    {
+      var joinEntry = _db.CourseDepartment.FirstOrDefault(entry => entry.CourseDepartmentId == joinId);
+      _db.CourseDepartment.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

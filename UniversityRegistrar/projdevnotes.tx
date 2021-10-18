@@ -1,0 +1,6 @@
+- Views/Departments/Details.cshtml: Fix and implement if/else for DepartmentStudentJE
+    -May need to update other related views
+- Add a department to a student and/or a course
+- replace var with appropriate type
+- styling
+- add another join table (Colleges?)

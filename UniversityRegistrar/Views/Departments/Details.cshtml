@@ -8,7 +8,7 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.DepartmentName): @Html.DisplayFor(model => model.DepartmentName)</h3>
 
-@if(@Model.JoinEntities3.Count == 0)
+@if(@Model.CourseDepartmentJE.Count == 0)
 {
   <p>There are no courses in this department</p>
 }
@@ -16,7 +16,7 @@ else
 {
   <h4>Courses in this department are:</h4>
   <ul>
-  @foreach(var join in Model.JoinEntities3)
+  @foreach(var join in Model.CourseDepartmentJE)
   {
     <li>@join.Course.CourseName</li>
     @using (Html.BeginForm("DeleteCourse", "Departments"))
@@ -28,7 +28,7 @@ else
   </ul>
 }
 
-@* @if(@Model.JoinEntities3.Count == 0)
+@* @if(@Model.DepartmentStudentJE.Count == 0)
 {
   <p>There are no courses in this department</p>
 }
@@ -36,7 +36,7 @@ else
 {
   <h4>Courses in this department are:</h4>
   <ul>
-  @foreach(var join in Model.JoinEntities3)
+  @foreach(var join in Model.DepartmentStudentJE)
   {
     <li>@join.Course.CourseName</li>
     @using (Html.BeginForm("DeleteCourse", "Departments"))
