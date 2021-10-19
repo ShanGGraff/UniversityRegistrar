@@ -5,6 +5,10 @@
 - styling
 - add another join table (Colleges?)
 - README (Setup does not include creating migrations or a SQL file)
-- Error handling to prevent adding the same join table entry twice
 - Remove drop down boxes from Create() and Edit() ?
 - Add a one to many relationship to practice having both relationships in one project
+- Error handling to prevent adding the same join table entry twice/Don't allow for duplicate objects with the same name
+    - TODO: Let the view have access to the ModelStateError object in order to include an error message
+    Proposed code that didn't work in Create.cshtml
+    @Html.ValidationMessageFor(x => x.DuplicateName)
+    -Need to confirm that model state error is actually being added (StudentsController.cs line 40)

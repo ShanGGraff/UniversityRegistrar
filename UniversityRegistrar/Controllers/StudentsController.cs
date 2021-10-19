@@ -30,14 +30,27 @@ namespace UniversityRegistrar.Controllers
     [HttpPost]
     public ActionResult Create(Student student, int CourseId)
     {
-
-      _db.Students.Add(student);
-      _db.SaveChanges();
-      if (CourseId != 0)
+      bool isUnique = true;
+      List<Student> studentList = _db.Students.ToList();
+      foreach(Student iteration in studentList)
       {
-        _db.Registrar.Add(new Registrar() { CourseId = CourseId, StudentId = student.StudentId });
+        if (student.StudentName == iteration.StudentName) 
+        {
+          isUnique = false;
+          ModelState.AddModelError("DuplicateName", student.StudentName + " Is already enrolled");
+          return RedirectToAction("Create");
+        }
       }
-      _db.SaveChanges();
+      if (isUnique)
+      {
+        _db.Students.Add(student);
+        _db.SaveChanges();
+        if (CourseId != 0)
+        {
+          _db.Registrar.Add(new Registrar() { CourseId = CourseId, StudentId = student.StudentId });
+        }
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
 
