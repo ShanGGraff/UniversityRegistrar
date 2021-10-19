@@ -43,7 +43,7 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult Details(int id)
     {
-      var thisDepartment = _db.Departments
+      Department thisDepartment = _db.Departments
           .Include(department => department.DepartmentStudentJE)
           .ThenInclude(join => join.Student)
           .Include(department => department.CourseDepartmentJE)
@@ -54,7 +54,7 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult Edit(int id)
     { 
-      var thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
+      Department thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
       ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
       return View(thisDepartment);
     }
@@ -73,7 +73,7 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult AddCourse(int id)
     {
-      var thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
+      Department thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
       ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
       return View(thisDepartment);
     }
@@ -91,14 +91,14 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult Delete(int id)
     {
-      var thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
+      Department thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
       return View(thisDepartment);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      var thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
+      Department thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
       _db.Departments.Remove(thisDepartment);
       _db.SaveChanges();
       return RedirectToAction("Index");
