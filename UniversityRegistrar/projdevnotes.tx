@@ -4,3 +4,7 @@
 - replace var with appropriate type
 - styling
 - add another join table (Colleges?)
+- README (Setup does not include creating migrations or a SQL file)
+- Error handling to prevent adding the same join table entry twice
+- Remove drop down boxes from Create() and Edit() ?
+- Add a one to many relationship to practice having both relationships in one project

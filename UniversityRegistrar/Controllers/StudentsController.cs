@@ -30,6 +30,7 @@ namespace UniversityRegistrar.Controllers
     [HttpPost]
     public ActionResult Create(Student student, int CourseId)
     {
+
       _db.Students.Add(student);
       _db.SaveChanges();
       if (CourseId != 0)
