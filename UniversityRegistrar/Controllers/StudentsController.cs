@@ -56,7 +56,7 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult Details(int id)
     {
-      var thisStudent = _db.Students
+      Student thisStudent = _db.Students
           .Include(student => student.JoinEntities)
           .ThenInclude(join => join.Course)
           .FirstOrDefault(student => student.StudentId == id);
@@ -65,7 +65,7 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult Edit(int id)
     {
-      var thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
+      Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
       ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
       return View(thisStudent);
     }
@@ -84,7 +84,7 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult AddCourse(int id)
     {
-      var thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
+      Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
       ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
       return View(thisStudent);
     }
@@ -102,14 +102,14 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult Delete(int id)
     {
-      var thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
+      Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
       return View(thisStudent);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      var thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
+      Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
       _db.Students.Remove(thisStudent);
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -118,7 +118,7 @@ namespace UniversityRegistrar.Controllers
     [HttpPost]
     public ActionResult DeleteCourse(int joinId)
     {
-      var joinEntry = _db.Registrar.FirstOrDefault(entry => entry.RegistrarId == joinId);
+      Registrar joinEntry = _db.Registrar.FirstOrDefault(entry => entry.RegistrarId == joinId);
       _db.Registrar.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
