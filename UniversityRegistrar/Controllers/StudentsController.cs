@@ -37,7 +37,7 @@ namespace UniversityRegistrar.Controllers
         if (student.StudentName == iteration.StudentName) 
         {
           isUnique = false;
-          ModelState.AddModelError("DuplicateName", student.StudentName + " Is already enrolled");
+          ModelState.AddModelError("DuplicateName", "This student is already enrolled");
           return RedirectToAction("Create");
         }
       }
