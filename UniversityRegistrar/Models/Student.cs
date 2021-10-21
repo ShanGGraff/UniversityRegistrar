@@ -11,6 +11,7 @@ namespace UniversityRegistrar.Models
     public Student()
     {
       this.JoinEntities = new HashSet<Registrar>();
+      this.DepartmentStudentJE = new HashSet<DepartmentStudent>();
     }
 
     public int StudentId { get; set; }
@@ -22,5 +23,6 @@ namespace UniversityRegistrar.Models
     public DateTime EnrollmentDate {get; set;}
 
     public virtual ICollection<Registrar> JoinEntities { get;}
+    public virtual ICollection<DepartmentStudent> DepartmentStudentJE { get; set; }
   }
 }
