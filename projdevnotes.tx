@@ -1,0 +1,9 @@
+- Finish adding a department (a major) to a student:
+    Still needed:
+      -In StudentsController: AddDepartment get & post routes
+      -Create Views/Students/AddDepartment.cshtml
+- Add a department to a a course
+- styling
+- add another join table (Colleges?)
+- Remove drop down boxes from Create() and Edit() ?
+- Add a one to many relationship to practice having both relationships in one project
