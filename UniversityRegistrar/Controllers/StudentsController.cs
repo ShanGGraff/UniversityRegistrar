@@ -30,6 +30,7 @@ namespace UniversityRegistrar.Controllers
     [HttpPost]
     public ActionResult Create(Student student, int CourseId)
     {
+      ViewBag.ErrorMessage = "";
       bool isUnique = true;
       List<Student> studentList = _db.Students.ToList();
       foreach(Student iteration in studentList)
@@ -37,8 +38,9 @@ namespace UniversityRegistrar.Controllers
         if (student.StudentName == iteration.StudentName) 
         {
           isUnique = false;
-          ModelState.AddModelError("DuplicateName", "This student is already enrolled");
-          return RedirectToAction("Create");
+          ModelState.AddModelError("DuplicateName", iteration.StudentName + " is already enrolled");
+          ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
+          return View();
         }
       }
       if (isUnique)
