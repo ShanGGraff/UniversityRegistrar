@@ -28,25 +28,25 @@ else
   </ul>
 }
 
-@* @if(@Model.DepartmentStudentJE.Count == 0)
+@if(@Model.DepartmentStudentJE.Count == 0)
 {
-  <p>There are no courses in this department</p>
+  <p>There are no students in this department</p>
 }
 else
 {
-  <h4>Courses in this department are:</h4>
+  <h4>Students in this department are:</h4>
   <ul>
   @foreach(var join in Model.DepartmentStudentJE)
   {
-    <li>@join.Course.CourseName</li>
-    @using (Html.BeginForm("DeleteCourse", "Departments"))
+    <li>@join.Student.StudentName</li>
+    @using (Html.BeginForm("DeleteStudent", "Departments"))
     {
-      @Html.Hidden("joinId", @join.CourseDepartmentId)
+      @Html.Hidden("joinId", @join.DepartmentStudentId)
       <input type="submit" value="Delete"/>
     }
   }
   </ul>
-} *@
+}
 
 <p>@Html.ActionLink("Add a Course", "AddCourse", new { id = Model.DepartmentId })</p> 
 
