@@ -29,8 +29,28 @@ else
   </ul>
 }
 
-<p>@Html.ActionLink("Add a Course", "AddCourse", new { id = Model.StudentId })</p>
+@if(@Model.DepartmentStudentJE.Count == 0)
+{
+  <p>This student isn't enrolled in any departments</p>
+}
+else
+{
+  <h4>Departments the student belongs to:</h4>
+  <ul>
+  @foreach(var join in Model.DepartmentStudentJE)
+  {
+    <li>@join.Department.DepartmentName</li>
+    @using (Html.BeginForm("DeleteDepartment", "Students"))
+    {
+      @Html.Hidden("joinId", @join.DepartmentStudentId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+}
 
+<p>@Html.ActionLink("Add a Course", "AddCourse", new { id = Model.StudentId })</p>
+<p>@Html.ActionLink("Add a Department", "AddDepartment", new { id = Model.StudentId })</p>
 <p>@Html.ActionLink("Back to list", "Index")</p>
 <p>@Html.ActionLink("Edit Student", "Edit", new { id = Model.StudentId })</p>
 <p>@Html.ActionLink("Terminate Student", "Delete", new { id = Model.StudentId })</p>
