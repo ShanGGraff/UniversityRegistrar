@@ -3,9 +3,9 @@
 }
 
 @model UniversityRegistrar.Models.Student
-@* @Html.ValidationSummary(false, "", new { @class = "text-danger" }) *@
-@Html.ValidationMessage("DuplicateName")
 <h4>Add a new student</h4>
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
 @using (Html.BeginForm())
 {
