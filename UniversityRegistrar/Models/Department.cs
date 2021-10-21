@@ -8,8 +8,6 @@ namespace UniversityRegistrar.Models
   {
     public Department()
     {
-      // this.JoinEntities3 = new HashSet<CourseDepartment>();
-      // this.JoinEntities2 = new HashSet<DepartmentStudent>();
       this.CourseDepartmentJE = new HashSet<CourseDepartment>();
       this.DepartmentStudentJE = new HashSet<DepartmentStudent>();
     }
